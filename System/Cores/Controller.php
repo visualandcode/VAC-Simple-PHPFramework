@@ -1,12 +1,10 @@
 <?php  
 
-namespace Libs;
+namespace Cores;
 
 class Controller {
 
-
 	
-
 
 }
 

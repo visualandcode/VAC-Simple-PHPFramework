@@ -7,5 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'System\\' => array($baseDir . '/System'),
+    'Modular\\' => array($baseDir . '/Modular'),
     'Libs\\' => array($baseDir . '/System/Libraries'),
+    'Cores\\' => array($baseDir . '/System/Cores'),
 );

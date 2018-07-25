@@ -13,8 +13,9 @@
     "autoload": {
         "psr-4": {
             "System\\": "System/" ,
-            "Libs\\": "System/Libraries/"
-
+            "Libs\\": "System/Libraries/", 
+            "Modular\\": "Modular/" ,
+            "Cores\\": "System/Cores/" 
         }
     }
 }

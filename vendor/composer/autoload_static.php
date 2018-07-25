@@ -11,9 +11,17 @@ class ComposerStaticInit61e699b6fb92cd46cd4a2b86a519847b
         array (
             'System\\' => 7,
         ),
+        'M' => 
+        array (
+            'Modular\\' => 8,
+        ),
         'L' => 
         array (
             'Libs\\' => 5,
+        ),
+        'C' => 
+        array (
+            'Cores\\' => 6,
         ),
     );
 
@@ -22,9 +30,17 @@ class ComposerStaticInit61e699b6fb92cd46cd4a2b86a519847b
         array (
             0 => __DIR__ . '/../..' . '/System',
         ),
+        'Modular\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modular',
+        ),
         'Libs\\' => 
         array (
             0 => __DIR__ . '/../..' . '/System/Libraries',
+        ),
+        'Cores\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/System/Cores',
         ),
     );
 
