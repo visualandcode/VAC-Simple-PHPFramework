@@ -1,0 +1,21 @@
+{
+  "name": "VAC-Simple-PHPFramework",
+  "homepage": "https://github.com/visualandcode/VAC-Simple-PHPFramework",
+  "description": "Dependencies Visual and Code PHPFramework",
+  "main": "",
+  "authors": [
+    "Ahmad Wahyudin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "vue": "^2.5.16"
+  }
+}

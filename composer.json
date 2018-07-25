@@ -1,0 +1,20 @@
+{
+    "name": "vac-framework/library",
+    "description": "VAC-Development",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmad Wahyudin",
+            "email": "ahmadwahyudin119@gmail.com"
+        }
+    ],
+    "require": {} , 
+    "autoload": {
+        "psr-4": {
+            "System\\": "System/" ,
+            "Libs\\": "System/Libraries/"
+
+        }
+    }
+}
