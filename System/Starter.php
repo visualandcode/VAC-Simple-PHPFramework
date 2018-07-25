@@ -4,9 +4,9 @@ use Libs\Scanning,
 	Libs\Helper\Clearing;
 
 // check if htaccess is found
-if ( is_readable( "../.htaccess" ) ) {
+if ( is_readable( "../.htaccess" ) ) 
+{
 
-	echo "<pre>";
 	//print_r( $_SERVER );
 
 	if ( isset( $_SERVER["REQUEST_URI"] ) ) 
@@ -38,18 +38,55 @@ if ( is_readable( "../.htaccess" ) ) {
 				{
 					$Modular = ucfirst($URI[0]);
 
+					$CtrlModule = 'Welcome';
+					if ( isset( $URI[1] ) ) 
+					{	
+						$CtrlModule = $URI[1];
+					}
+
+
+					$Method = 'index';
+					if ( isset( $URI[2] ) ) 
+					{	
+						$Method = $URI[2];
+					}
+
+
 					// activate the router 
 					$scanStructure = new Scanning( $Modular );
 
 					// check error 
-					if ( empty($scanStructure->error) ) {
+					if ( empty($scanStructure->error) ) 
+
+					{
+						
+
+						$CtrlMethod = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule.'\\Controllers\\'.$CtrlModule."Controller";
+						
+						if ( class_exists( $CtrlMethod ) ) 
+						{
+
+							$Controller = new $CtrlMethod();
+
+							if ( method_exists( $Controller , $Method ) ) 
+							{
+								$Controller->{$Method}();
+
+							}
+							else {
+								throw new Exception("Route not found", 404);
+							}
+
+							
+						}
+						else {
+							throw new Exception("Route not found", 404);
+
+						}
 
 
-						$CtrlMethod = 'Modular\\'.$Modular.'\\HMVC\\Welcome\\Controllers\\'."WelcomeController";
-						$Controller = new $CtrlMethod();
-
-
-					} else {
+					} 
+					else {
 						throw new Exception("Route not found", 404);
 
 					}
@@ -61,6 +98,8 @@ if ( is_readable( "../.htaccess" ) ) {
 
 	}
 
+} else {
+	throw new Exception("Htaccess not found", 404);
 }
 
 

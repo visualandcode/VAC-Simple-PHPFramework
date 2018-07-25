@@ -43,9 +43,9 @@ try {
 } catch (Exception $e) {
 
 	echo json_encode([
-		"success" => false ,
-		"code" 	  => $e->getCode() , 
-		"code" 	  => $e->getMessage() , 
+		"success" 	  => false ,
+		"code" 	      => $e->getCode() , 
+		"message" 	  => $e->getMessage() , 
 	]);
 }
 
