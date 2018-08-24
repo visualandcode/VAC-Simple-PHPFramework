@@ -1,8 +1,8 @@
 <?php  
 
-namespace Modular\Api\HMVC\Welcome\Models;
+namespace Modular\Api\HMVC\Users\Models;
 
-class Welcome {
+class anu {
 
 	public function findById ( $id = null ) {
 		if ( !is_null( $id ) ) {

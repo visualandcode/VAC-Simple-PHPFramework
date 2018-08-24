@@ -31,7 +31,7 @@ class Scanning {
 		$this->_scan();
 
 		if ( $this->error == 0 ) {
-			return true;
+			return $this;
 		}
 	}
 

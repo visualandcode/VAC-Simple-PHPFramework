@@ -3,11 +3,11 @@ namespace Cores;
 
 class Routes {
 
-
 	private $_controller_name = array();
 	private $_data_views      = array();
 	private $_models		  = array();
 	private $_models_object	  = array();
+
 
 	/**
 	 * [view description]
@@ -24,6 +24,8 @@ class Routes {
 			
 			$dir_filename = "../" . $this->_controllermodular . "/Views/"; //set directory view by modular
 			$filename     = "../" . $this->_controllermodular . "/Views/" . $filename . ".views.php"; //set directory view by modular
+
+
 
 			if ( is_dir( $dir_filename ) ) {  // check if dir filename is exists
 				if ( file_exists($filename) ) {
@@ -46,19 +48,6 @@ class Routes {
 
 
 	/**
-	 * [viewjson description]
-	 * @return [type] [description]
-	 */
-	public function viewjson ( $content = null ) {
-		header('Content-Type: application/json');
-		if ( is_array( $content ) || is_object($content) ) {
-			$content = array_merge( array( "success" => true ) , $content );
-			return json_encode($content , JSON_PRETTY_PRINT);
-		}
-	}
-
-
-	/**
 	 * [model description]
 	 * @return [type] [description]
 	 */
@@ -69,14 +58,33 @@ class Routes {
 
 		if ( !is_null( $filename ) ) 
 		{
-			$dir_filename = "../" . $this->_controllermodular . "/Models/"; //set directory view by modular
+			$is_include_mod = 0;
+			if ( strpos( $filename , "/"  ) !== false ) {
+				$passedmodels = explode( "/" , $filename );
+				if ( is_array( $passedmodels ) && count( $passedmodels ) == 2 ) {
+					$is_include_mod += 1;
+					$this->class_model = "Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\" . $passedmodels[1]; 
+	
+					$dir_filename = "../Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\"; //set directory view by modular
+				}
+			} else {
+				$dir_filename = "../" . $this->_controllermodular . "/Models/"; //set directory view by modular
+			}
+
+
 			$filename = array( $filename );
 			
 			if ( is_dir( $dir_filename ) ) 
 			{
 				foreach ( $filename as $key => $value ) 
 				{
-					$filename_exist     = $this->_controllermodular."\Models\\".$value; //set directory view by modular
+					
+					if ( $is_include_mod > 0 ) {
+						$filename_exist     = $this->class_model; //set directory view by modular
+					} else {
+						$filename_exist     = $this->class_model."\Models\\".$value; //set directory view by modular
+					}
+
 					if ( class_exists( $filename_exist ) ) {
 						$this->_models[$value] = $filename_exist;
 						$this->{$value} = new $filename_exist();
@@ -94,9 +102,36 @@ class Routes {
 		{
 			throw new \Exception("Your model request not found.", 404);
 		}
-
-
 	}
+
+
+	/**
+	 * [__get description]
+	 * @return [type] [description]
+	 */
+	public function __get ( $static = null ) {
+		if ( !is_null($static) ) {
+			$classes = "\\Libs\\Helper\\" . ucfirst($static);
+			if ( class_exists( $classes ) ) {
+				return new $classes;
+			} else {
+				return null;
+			}
+		}
+	}	
+
+
+	/**
+	 * [request description]
+	 * @return [type] [description]
+	 */
+	public static function request () {
+		$class_request = "\\Libs\\Http\\Request";
+		if ( class_exists( $class_request ) ) {
+			return new $class_request;
+		}
+	}
+
 
 
 

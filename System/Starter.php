@@ -86,6 +86,7 @@ if ( is_readable( "../.htaccess" ) )
 							$Controller->_method     		= $Method;
 							$Controller->_modular 			= $DirModular;
 							$Controller->_controllermodular = $DirCtrlModular;
+							$Controller->_settings		    = $scanStructure;
 
 							if ( method_exists( $Controller , $Method ) ) 
 							{	
@@ -99,7 +100,7 @@ if ( is_readable( "../.htaccess" ) )
 
 								$view_return = $Controller->{$Method}( $arg_one , $arg_two , $arg_thr , $arg_fou , $arg_fiv );
 								if ( is_array( $view_return ) ) {
-									echo $Controller->viewjson( $view_return );
+									echo $Controller->debuger::json( $view_return );
 								}
 
 							}

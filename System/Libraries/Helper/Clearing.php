@@ -8,7 +8,7 @@ class Clearing {
 	 * [querystring description]
 	 * @return [type] [description]
 	 */
-	public function querystring ( $string = null ) {
+	public static function querystring ( $string = null ) {
 		
 		$callback = $string;
 

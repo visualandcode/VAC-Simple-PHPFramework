@@ -3,6 +3,7 @@
 namespace Cores;
 
 use Cores\Routes; 
+use Libs\Helper\Debuger as Debug;
 
 class Controller extends Routes {
 
@@ -19,6 +20,8 @@ class Controller extends Routes {
 
 		return self::$instance;
 	}
+
+	
 
 
 	

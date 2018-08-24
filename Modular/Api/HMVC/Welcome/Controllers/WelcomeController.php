@@ -4,10 +4,26 @@ namespace Modular\Api\HMVC\Welcome\Controllers;
 
 class WelcomeController extends \Cores\Controller {
 
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
 	public function index () {
-		$this->model( "Welcome" );
-		print_r($this->getInstance());
-		return array( "anu" => 1 );
+		
+
+		$request = self::request()->query();
+
+	}
+
+
+	/**
+	 * [anu description]
+	 * @return [type] [description]
+	 */
+	public function anu () {
+		
+
+
 	}
 
 
