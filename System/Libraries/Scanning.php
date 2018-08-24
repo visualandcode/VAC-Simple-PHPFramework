@@ -1,5 +1,10 @@
 <?php  
 
+/**
+ * This file scanning is mean for 
+ * Check directory modular is structured and was foldered
+ * Author : Ahmad Wahyudin
+ */
 
 namespace Libs;
 

@@ -6,7 +6,6 @@ use Libs\Scanning,
 // check if htaccess is found
 if ( is_readable( "../.htaccess" ) ) 
 {
-
 	//print_r( $_SERVER );
 
 	if ( isset( $_SERVER["REQUEST_URI"] ) ) 
@@ -61,24 +60,57 @@ if ( is_readable( "../.htaccess" ) )
 					{
 						
 
-						$CtrlMethod = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule.'\\Controllers\\'.$CtrlModule."Controller";
+						$CtrlMethod     = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule.'\\Controllers\\'.$CtrlModule."Controller";
+						$DirCtrlModular = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule;
+						$DirModular     = 'Modular\\'.$Modular.'\\';
 						
 						if ( class_exists( $CtrlMethod ) ) 
 						{
 
-							$Controller = new $CtrlMethod();
+							// $Controller = new $CtrlMethod( (object)[
+							// 	'module'     => $Modular , 
+							// 	'controller' => $CtrlModule , 
+							// 	'method'	 => $Method
+							// ]);
+							
+
+
+							/**
+							 * [$Controller description]
+							 * @var [type]
+							 * define a something is important!
+							 */
+							$Controller 					= new $CtrlMethod;
+							$Controller->_module     		= $Modular;
+							$Controller->_controller 		= $CtrlModule;
+							$Controller->_method     		= $Method;
+							$Controller->_modular 			= $DirModular;
+							$Controller->_controllermodular = $DirCtrlModular;
 
 							if ( method_exists( $Controller , $Method ) ) 
-							{
-								$Controller->{$Method}();
+							{	
+								
+								// each data 
+								$arg_one = isset( $URI[3] ) ? $URI[3] : null;
+								$arg_two = isset( $URI[4] ) ? $URI[4] : null;
+								$arg_thr = isset( $URI[5] ) ? $URI[5] : null;
+								$arg_fou = isset( $URI[6] ) ? $URI[6] : null;
+								$arg_fiv = isset( $URI[7] ) ? $URI[7] : null;
+
+								$view_return = $Controller->{$Method}( $arg_one , $arg_two , $arg_thr , $arg_fou , $arg_fiv );
+								if ( is_array( $view_return ) ) {
+									echo $Controller->viewjson( $view_return );
+								}
 
 							}
 							else {
 								throw new Exception("Route not found", 404);
 							}
 
-							
+
 						}
+
+
 						else {
 							throw new Exception("Route not found", 404);
 
@@ -86,6 +118,7 @@ if ( is_readable( "../.htaccess" ) )
 
 
 					} 
+					
 					else {
 						throw new Exception("Route not found", 404);
 
