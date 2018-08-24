@@ -88,6 +88,9 @@ if ( is_readable( "../.htaccess" ) )
 							$Controller->_controllermodular = $DirCtrlModular;
 							$Controller->_settings		    = $scanStructure;
 
+
+							if ( empty($Method) ) $Method = 'index';
+
 							if ( method_exists( $Controller , $Method ) ) 
 							{	
 								
@@ -105,7 +108,7 @@ if ( is_readable( "../.htaccess" ) )
 
 							}
 							else {
-								throw new Exception("Route not found", 404);
+								throw new Exception("Route not found", 401);
 							}
 
 
@@ -113,7 +116,7 @@ if ( is_readable( "../.htaccess" ) )
 
 
 						else {
-							throw new Exception("Route not found", 404);
+							throw new Exception("Route not found", 402);
 
 						}
 
@@ -121,7 +124,7 @@ if ( is_readable( "../.htaccess" ) )
 					} 
 					
 					else {
-						throw new Exception("Route not found", 404);
+						throw new Exception("Route not found", 403);
 
 					}
 

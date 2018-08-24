@@ -104,6 +104,14 @@ class Routes {
 		}
 	}
 
+	/**
+	 * [request description]
+	 * @return [type] [description]
+	 */
+	public static function request () {
+		return new \Libs\Http\Request;
+	}
+
 
 	/**
 	 * [__get description]
@@ -120,17 +128,6 @@ class Routes {
 		}
 	}	
 
-
-	/**
-	 * [request description]
-	 * @return [type] [description]
-	 */
-	public static function request () {
-		$class_request = "\\Libs\\Http\\Request";
-		if ( class_exists( $class_request ) ) {
-			return new $class_request;
-		}
-	}
 
 
 

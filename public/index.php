@@ -29,7 +29,6 @@ if ( file_exists( $autoloader ) ) {
  */
 
 
-
 try {
 
 	$basefolder = 'VAC-Simple-PHPFramework';
@@ -47,6 +46,7 @@ try {
 		"code" 	      => $e->getCode() , 
 		"message" 	  => $e->getMessage() , 
 	]);
+
 }
 
 

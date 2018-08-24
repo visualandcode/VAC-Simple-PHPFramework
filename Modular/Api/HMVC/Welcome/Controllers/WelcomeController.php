@@ -13,6 +13,8 @@ class WelcomeController extends \Cores\Controller {
 
 		$request = self::request()->query();
 
+		print_r($request);
+
 	}
 
 
