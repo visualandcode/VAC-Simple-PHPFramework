@@ -3,6 +3,7 @@
 use Libs\Scanning,
 	Libs\Helper\Clearing;
 
+
 // check if htaccess is found
 if ( is_readable( "../.htaccess" ) ) 
 {
@@ -10,16 +11,13 @@ if ( is_readable( "../.htaccess" ) )
 
 	if ( isset( $_SERVER["REQUEST_URI"] ) ) 
 	{
-		
 		$REQUEST_URI = trim($_SERVER["REQUEST_URI"] , "/");
 
-		if ( strpos( $REQUEST_URI ,  "/" ) !== false ) 
-		{
-				
+		if ( !strpos( $REQUEST_URI ,  "/" ) !== false ) $REQUEST_URI .= $baseweb; 
+
 			$REQUEST_URI = explode( "/" , $REQUEST_URI );
 			if ( is_array($REQUEST_URI) && count( $REQUEST_URI ) > 0 ) 
 			{
-				
 				// unset base folder
 				if ( $basefolder == $REQUEST_URI[0] ) 
 				{
@@ -35,7 +33,8 @@ if ( is_readable( "../.htaccess" ) )
 
 				if ( isset( $URI[0] ) ) 
 				{
-					$Modular = ucfirst($URI[0]);
+					$Modular 				  = ucfirst($URI[0]);
+					$GLOBALS['route_modular'] = $Modular;
 
 					$CtrlModule = 'Welcome';
 					if ( isset( $URI[1] ) ) 
@@ -53,19 +52,18 @@ if ( is_readable( "../.htaccess" ) )
 
 					// activate the router 
 					$scanStructure = new Scanning( $Modular );
+					$scanStructure = $scanStructure->modular();
 
 					// check error 
-					if ( empty($scanStructure->error) ) 
-
-					{
+					if ( empty($scanStructure->error) ) {
 						
-
 						$CtrlMethod     = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule.'\\Controllers\\'.$CtrlModule."Controller";
 						$DirCtrlModular = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule;
 						$DirModular     = 'Modular\\'.$Modular.'\\';
 						
 						if ( class_exists( $CtrlMethod ) ) 
 						{
+
 
 							// $Controller = new $CtrlMethod( (object)[
 							// 	'module'     => $Modular , 
@@ -88,8 +86,8 @@ if ( is_readable( "../.htaccess" ) )
 							$Controller->_controllermodular = $DirCtrlModular;
 							$Controller->_settings		    = $scanStructure;
 
-
-							if ( empty($Method) ) $Method = 'index';
+							if ( method_exists( $Controller , "init") ) $Controller->init(); // if initialization is exists
+							if ( empty($Method) ) $Method = 'index'; // if empty access to index
 
 							if ( method_exists( $Controller , $Method ) ) 
 							{	
@@ -112,10 +110,7 @@ if ( is_readable( "../.htaccess" ) )
 							}
 
 
-						}
-
-
-						else {
+						} else {
 							throw new Exception("Route not found", 402);
 
 						}
@@ -131,9 +126,8 @@ if ( is_readable( "../.htaccess" ) )
 				}
 
 			}
-		}
 
-	}
+	} 
 
 } else {
 	throw new Exception("Htaccess not found", 404);

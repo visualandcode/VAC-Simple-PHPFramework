@@ -1,24 +1,19 @@
 <?php  
 
-namespace Modular\Api\HMVC\Welcome\Controllers;
+namespace Modular\Web\HMVC\Welcome\Controllers;
 
 class WelcomeController extends \Cores\Controller {
-
-	/**
-	 * [__construct description]
-	 */
-	public function init () {
-		$this->model( array("Welcome" , "Welcomes")  );
-	}
 
 	/**
 	 * [index description]
 	 * @return [type] [description]
 	 */
 	public function index () {
-		$this->welcome->findById();
+		
+		$this->model( array("Welcome" , "Welcomes")  );
+		$this->Welcomes->findById();
+		$request = self::request()->query();
 
-		echo $this->timeexec();
 	}
 
 

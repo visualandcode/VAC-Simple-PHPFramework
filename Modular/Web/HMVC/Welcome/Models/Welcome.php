@@ -1,11 +1,11 @@
 <?php  
 
-namespace Modular\Api\HMVC\Welcome\Models;
+namespace Modular\Web\HMVC\Welcome\Models;
 
 class Welcome extends \Cores\Models {
 
 	public function findById ( $id = null ) {
-		self::instances()->debuger::print($this);
+		$this->query();
 	}
 
 	public function index () {

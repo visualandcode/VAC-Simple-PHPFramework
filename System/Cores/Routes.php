@@ -1,12 +1,13 @@
 <?php  
 namespace Cores;
+use Libs\Instances as Instances;
 
-class Routes {
+class Routes extends Instances {
 
 	private $_controller_name = array();
 	private $_data_views      = array();
 	private $_models		  = array();
-	private $_models_object	  = array();
+	//private $_models_object	  = array();
 
 
 	/**
@@ -58,44 +59,53 @@ class Routes {
 
 		if ( !is_null( $filename ) ) 
 		{
-			$is_include_mod = 0;
-			if ( strpos( $filename , "/"  ) !== false ) {
-				$passedmodels = explode( "/" , $filename );
-				if ( is_array( $passedmodels ) && count( $passedmodels ) == 2 ) {
-					$is_include_mod += 1;
-					$this->class_model = "Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\" . $passedmodels[1]; 
-	
-					$dir_filename = "../Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\"; //set directory view by modular
-				}
-			} else {
-				$dir_filename = "../" . $this->_controllermodular . "/Models/"; //set directory view by modular
+
+			if ( !is_array( $filename ) ) {
+				$filename = array( $filename );
 			}
 
 
-			$filename = array( $filename );
-			
-			if ( is_dir( $dir_filename ) ) 
-			{
 				foreach ( $filename as $key => $value ) 
 				{
-					
-					if ( $is_include_mod > 0 ) {
-						$filename_exist     = $this->class_model; //set directory view by modular
+
+					$is_include_mod = 0;
+					if ( strpos( $value , "/"  ) !== false ) {
+						$passedmodels = explode( "/" , $value );
+						if ( is_array( $passedmodels ) && count( $passedmodels ) == 2 ) {
+							$is_include_mod += 1;
+							$class_model = "Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\" . $passedmodels[1]; 
+							$dir_filename = "../Modular\\" . $this->_module . "\\HMVC\\" . $passedmodels[0] . "\Models\\"; //set directory view by modular
+						}
 					} else {
-						$filename_exist     = $this->class_model."\Models\\".$value; //set directory view by modular
+						$dir_filename = "../" . $this->_controllermodular . "/Models/"; //set directory view by modular
 					}
 
-					if ( class_exists( $filename_exist ) ) {
-						$this->_models[$value] = $filename_exist;
-						$this->{$value} = new $filename_exist();
-						$this->_models_object[$value] = $this->{$value};
+					if ( is_dir( $dir_filename ) ) 
+					{	
+						if ( $is_include_mod > 0 ) {
+							$filename_exist     = $class_model; //set directory view by modular
+						} else {
+							$filename_exist     = $this->_controllermodular."\Models\\".$value; //set directory view by modular
+						}
+
+
+						if ( class_exists( $filename_exist ) ) {
+							$this->_models[$value] = $filename_exist;
+							
+							$class_modelname 			   = strtolower($value); 
+							$this->{$class_modelname} 	   = new $filename_exist();
+							
+							//$this->_models_object[$value] = $this->{$value};
+						} else {
+
+							$counterror += 1;
+						}	
+
 					} else {
 						$counterror += 1;
-					}		
+					}	
 				} 	
-			} else {
-				$counterror += 1;
-			}
+			
 		}
 
 		if ( $counterror > 0 ) 
@@ -112,21 +122,15 @@ class Routes {
 		return new \Libs\Http\Request;
 	}
 
+	
 
 	/**
-	 * [__get description]
+	 * [settings description]
 	 * @return [type] [description]
 	 */
-	public function __get ( $static = null ) {
-		if ( !is_null($static) ) {
-			$classes = "\\Libs\\Helper\\" . ucfirst($static);
-			if ( class_exists( $classes ) ) {
-				return new $classes;
-			} else {
-				return null;
-			}
-		}
-	}	
+	public function settings () {
+		return $this->_settings->__appsettings();
+	}
 
 
 

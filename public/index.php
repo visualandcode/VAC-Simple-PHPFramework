@@ -32,6 +32,7 @@ if ( file_exists( $autoloader ) ) {
 try {
 
 	$basefolder = 'VAC-Simple-PHPFramework';
+	$baseweb    = '/Web';
 
 	$starter = __DIR__.'/../System/Starter.php';
 

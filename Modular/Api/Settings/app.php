@@ -2,7 +2,8 @@
 
 
 return array(
-	"ENVIRONMENT" => "DEVELOPMENT" 
+	"environment" => "DEVELOPMENT" ,
+	"layout"	  => "blue" 
 );
 
 

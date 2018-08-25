@@ -2,10 +2,11 @@
 
 namespace Modular\Api\HMVC\Welcome\Models;
 
-class Welcome extends \Cores\Models {
+class Welcomes extends \Cores\Models {
 
 	public function findById ( $id = null ) {
-		self::instances()->debuger::print($this);
+		$this->query();
+		
 	}
 
 	public function index () {

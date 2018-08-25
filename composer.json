@@ -9,7 +9,9 @@
             "email": "ahmadwahyudin119@gmail.com"
         }
     ],
-    "require": {} , 
+    "require": {
+        
+    } , 
     "autoload": {
         "psr-4": {
             "System\\": "System/" ,
