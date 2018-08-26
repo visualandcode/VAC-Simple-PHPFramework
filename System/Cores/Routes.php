@@ -14,6 +14,16 @@ class Routes extends Instances {
 
 
 	/**
+	 * [__construct description]
+	 */
+	public function __construct () {
+
+		// set autoloader
+		$this->request = new \Libs\Http\Request;
+
+	}
+
+	/**
 	 * [view description]
 	 * @param  [type] $filename [description]
 	 * @return [type]           [description]
@@ -28,8 +38,6 @@ class Routes extends Instances {
 			
 			$dir_filename = "../" . $this->_controllermodular . "/Views/"; //set directory view by modular
 			$filename     = "../" . $this->_controllermodular . "/Views/" . $filename . ".views.php"; //set directory view by modular
-
-
 
 			if ( is_dir( $dir_filename ) ) {  // check if dir filename is exists
 				if ( file_exists($filename) ) {
@@ -62,17 +70,21 @@ class Routes extends Instances {
 		$this->DBconnections = $this->__dbconnector();
 
 
+		// if file name is not null
 		if ( !is_null( $filename ) ) 
 		{
 
+
+			// check if filenane is an array
 			if ( !is_array( $filename ) ) {
 				$filename = array( $filename );
 			}
 
+				// loop filename untuk di include
 				foreach ( $filename as $key => $value ) 
 				{
 
-					$is_include_mod = 0;
+					$is_include_mod = 0; 
 					if ( strpos( $value , "/"  ) !== false ) {
 						$passedmodels = explode( "/" , $value );
 						if ( is_array( $passedmodels ) && count( $passedmodels ) == 2 ) {
@@ -84,6 +96,7 @@ class Routes extends Instances {
 						$dir_filename = "../" . $this->_controllermodular . "/Models/"; //set directory view by modular
 					}
 
+					// check jika ini adalah directory
 					if ( is_dir( $dir_filename ) ) 
 					{	
 						if ( $is_include_mod > 0 ) {
@@ -92,7 +105,7 @@ class Routes extends Instances {
 							$filename_exist     = $this->_controllermodular."\Models\\".$value; //set directory view by modular
 						}
 
-
+						// check if class is exists
 						if ( class_exists( $filename_exist ) ) {
 							$this->_models[$value] = $filename_exist;
 							
@@ -120,14 +133,6 @@ class Routes extends Instances {
 		}
 	}
 
-	/**
-	 * [request description]
-	 * @return [type] [description]
-	 */
-	public static function request () {
-		return new \Libs\Http\Request;
-	}
-
 	
 	/**
 	 * [connection description]
@@ -136,6 +141,12 @@ class Routes extends Instances {
 	private function __dbconnector () {
 		
 		$databases = $this->Variable::settings("databases");
+
+		if ( count((array)$databases) == 0 ) {
+			throw new \Exception("[ERR DB CONNECTION]", 1001);
+			
+		}
+
 		$config	   = (array)$databases;
 		$this->confconnection = $config;
 
@@ -176,20 +187,7 @@ class Routes extends Instances {
 
 		}
 		
-
-		
 	}
-	
-
-	/**
-	 * [settings description]
-	 * @return [type] [description]
-	 */
-	public function settings () {
-		return $this->_settings->__appsettings();
-	}
-
-
 
 
 

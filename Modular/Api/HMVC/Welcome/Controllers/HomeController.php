@@ -2,7 +2,7 @@
 
 namespace Modular\Api\HMVC\Welcome\Controllers;
 
-class WelcomeController extends \Cores\Controller {
+class HomeController extends \Cores\Controller {
 
 	/**
 	 * [__construct description]
@@ -17,7 +17,12 @@ class WelcomeController extends \Cores\Controller {
 	 * @return [type] [description]
 	 */
 	public function index () {
-		echo 1;
+		$this->welcome->findById();
+
+
+		echo "This is home";
+
+		echo $this->timeexec();
 	}
 
 
@@ -27,7 +32,6 @@ class WelcomeController extends \Cores\Controller {
 	 */
 	public function anu () {
 		
-
 
 	}
 

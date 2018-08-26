@@ -5,7 +5,7 @@ namespace Modular\Web\HMVC\Welcome\Models;
 class Welcome extends \Cores\Models {
 
 	public function findById ( $id = null ) {
-		$this->query();
+		//$this->query();
 	}
 
 	public function index () {

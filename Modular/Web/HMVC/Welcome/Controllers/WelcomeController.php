@@ -11,8 +11,10 @@ class WelcomeController extends \Cores\Controller {
 	public function index () {
 		
 		$this->model( array("Welcome" , "Welcomes")  );
-		$this->Welcomes->findById();
-		$request = self::request()->query();
+		$this->welcomes->findById();
+
+		$request = $this->request->query();
+		
 
 	}
 

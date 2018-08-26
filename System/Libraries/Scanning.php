@@ -8,6 +8,7 @@
 
 namespace Libs;
 
+use Libs\Helper\Variable;
 
 class Scanning {
 
@@ -35,6 +36,7 @@ class Scanning {
 		self::$__modular  = self::$__modular . $module;	
 	}
 
+
 	/**
 	 * [scan description]
 	 * @return [type] [description]
@@ -42,12 +44,12 @@ class Scanning {
 	public function modular () {
 		
 		if ( !is_dir( self::$__modular ) ) {
-			throw new \Exception("Your module not found!", 404);
+			throw new \Exception("[Module] not found!", 404);
 		}
 
 		foreach ( $this->_structure as $key => $val ) {
 			if ( !is_dir( self::$__modular . "/" . $val ) ) {
-				throw new \Exception("Your module dir $val not found!", 404);
+				throw new \Exception("[Module] module dir $val not found!", 404);
 			} else {
 				$this->error = 0;
 			}
@@ -83,12 +85,11 @@ class Scanning {
 		if ( is_array( $settings ) && count($settings) > 0 ) {
 			foreach ( $settings as $key => $value ) {
 				if ( file_exists( $value ) ) {
-					$arr_settings = require_once( $value );
+					$arr_settings = require( $value );
 					$configs[str_replace(".php" , "" , $key)] = (object)$arr_settings;
 				}
 			}	
 		}
-		$configs = $configs;
 
 		$databases = array();
 		if ( is_array( $configs ) && count( $configs ) > 0 ) 
@@ -110,12 +111,11 @@ class Scanning {
 		}
 
 		$configs["databases"] = (object)$databases;
+
+		$this->configs = $configs;
+
 		return (object)$configs;
 	}
-
-
-
-
 
 
 

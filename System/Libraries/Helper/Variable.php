@@ -5,6 +5,7 @@ use Libs\Scanning as Scanning;
 
 class Variable {
 
+
 	/**
 	 * [querystring description]
 	 * @return [type] [description]
@@ -26,7 +27,7 @@ class Variable {
 	 * [config description]
 	 * @return [type] [description]
 	 */
-	public static function settings ( $config = null ) {
+	public function settings ( $config = null ) {
 		$callback = false;
 
 		$scanning = self::global("route_modular");
@@ -51,6 +52,11 @@ class Variable {
 		}
 
 		return $callback;
+	}
+
+
+	public function test () {
+		echo 1;
 	}
 
 

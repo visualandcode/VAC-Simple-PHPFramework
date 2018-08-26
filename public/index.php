@@ -20,8 +20,6 @@ if ( file_exists( $autoloader ) ) {
 
 
 
-
-
 /**
  * ===============================================================
  * 						ROUTER
@@ -46,7 +44,7 @@ try {
 		"success" 	  => false ,
 		"code" 	      => $e->getCode() , 
 		"message" 	  => $e->getMessage() , 
-	]);
+	] , JSON_PRETTY_PRINT);
 
 }
 

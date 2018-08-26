@@ -2,7 +2,7 @@
 
 namespace Modular\Api\HMVC\Users\Models;
 
-class anu {
+class anu extends \Cores\Models {
 
 	public function findById ( $id = null ) {
 		if ( !is_null( $id ) ) {

@@ -2,10 +2,9 @@
 
 namespace Cores;
 
-use Cores\Routes; 
 use Libs\Helper\Debuger as Debug;
 
-class Controller extends Routes {
+class Controller extends \Cores\Routes {
 
 	public static $instance;
     

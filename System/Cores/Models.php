@@ -6,9 +6,8 @@ use Atlas\Query\Select;
 use Atlas\Query\Insert;
 use Atlas\Query\Update;
 use Atlas\Query\Delete;
-use Libs\Instances;
 
-class Models  {
+class Models extends \Libs\Instances  {
 
 
 	public $select;
@@ -23,7 +22,7 @@ class Models  {
 	 * @return [type] [description]
 	 */
 	public function run ( $changedb = false ) {
-				
+			
 		if ( $changedb == true ) {
 			$this->crud();
 			$this->db = $this;
@@ -77,16 +76,6 @@ class Models  {
 		$this->insert = Insert::new( $this->activeconnection );
 		$this->delete = Delete::new( $this->activeconnection );
 	}
-
-	/**
-	 * [instances description]
-	 * @return [type] [description]
-	 */
-	public function instances () {
-		return new Instances();
-	}	
-
-	
 
 
 	

@@ -10,7 +10,6 @@ class Welcome extends \Cores\Models {
 		$this->db->closedb();
 
 		$selectfrom = $this->select->columns('*')->from('table_one');
-		self::instances()->Debuger::print($selectfrom->fetchAll());
 
 
 

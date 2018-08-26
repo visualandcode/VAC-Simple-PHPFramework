@@ -4,6 +4,9 @@ namespace Libs;
 
 class Instances {
 
+
+	public $variable = array();
+
 	/**
 	 * [__get description]
 	 * @return [type] [description]
@@ -12,7 +15,9 @@ class Instances {
 		if ( !is_null($static) ) {
 			$classes = "\\Libs\\Helper\\" . ucfirst($static);
 			if ( class_exists( $classes ) ) {
-				return new $classes;
+				$classes_exists   = new $classes;
+				$this->variable[] = $classes_exists;
+				return $classes_exists;
 			} else {
 				return null;
 			}
