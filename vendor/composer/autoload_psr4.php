@@ -6,8 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'System\\' => array($baseDir . '/System'),
+    'Pds\\Skeleton\\' => array($vendorDir . '/pds/skeleton/src'),
     'Modular\\' => array($baseDir . '/Modular'),
     'Libs\\' => array($baseDir . '/System/Libraries'),
+    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Cores\\' => array($baseDir . '/System/Cores'),
+    'Atlas\\Query\\' => array($vendorDir . '/atlas/query/src'),
+    'Atlas\\Pdo\\' => array($vendorDir . '/atlas/pdo/src'),
 );

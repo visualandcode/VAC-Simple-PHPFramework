@@ -5,10 +5,21 @@ return array(
 
 	"default" => array(
 		"dbhost"    => "localhost" ,
-		"dbport"    => 3306 ,
+		"dbport"    => 3307 ,
 		"dbuser"    => "root" ,
 		"dbpass"    => "" ,
 		"dbname"    => "test" ,
+		"dbprevix"  => "" , 
+		"dbdriver"  => "mysql" , 
+		"dbstatus"  => "active" 
+	) , 
+
+	"mysql" => array(
+		"dbhost"    => "localhost" ,
+		"dbport"    => 3307 ,
+		"dbuser"    => "root" ,
+		"dbpass"    => "" ,
+		"dbname"    => "test_two" ,
 		"dbprevix"  => "" , 
 		"dbdriver"  => "mysql" , 
 		"dbstatus"  => "active" 

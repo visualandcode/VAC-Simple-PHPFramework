@@ -10,7 +10,9 @@
         }
     ],
     "require": {
-        
+        "atlas/query": "^1.2",
+        "phpunit/phpunit": "^7.3",
+        "pds/skeleton": "^1.0"
     } , 
     "autoload": {
         "psr-4": {

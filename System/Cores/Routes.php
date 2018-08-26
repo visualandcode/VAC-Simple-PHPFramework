@@ -7,6 +7,9 @@ class Routes extends Instances {
 	private $_controller_name = array();
 	private $_data_views      = array();
 	private $_models		  = array();
+	private $connection;
+	private $connections;
+
 	//private $_models_object	  = array();
 
 
@@ -56,6 +59,8 @@ class Routes extends Instances {
 
 		$counterror = 0;
 		
+		$this->DBconnections = $this->__dbconnector();
+
 
 		if ( !is_null( $filename ) ) 
 		{
@@ -63,7 +68,6 @@ class Routes extends Instances {
 			if ( !is_array( $filename ) ) {
 				$filename = array( $filename );
 			}
-
 
 				foreach ( $filename as $key => $value ) 
 				{
@@ -92,9 +96,11 @@ class Routes extends Instances {
 						if ( class_exists( $filename_exist ) ) {
 							$this->_models[$value] = $filename_exist;
 							
-							$class_modelname 			   = strtolower($value); 
-							$this->{$class_modelname} 	   = new $filename_exist();
-							
+							$class_modelname 			   		  = strtolower($value); 
+							$this->{$class_modelname}	   		  = new $filename_exist();
+							$this->{$class_modelname}->connection = $this->connection;
+							$this->{$class_modelname}			  = $this->{$class_modelname}->run();
+
 							//$this->_models_object[$value] = $this->{$value};
 						} else {
 
@@ -122,6 +128,57 @@ class Routes extends Instances {
 		return new \Libs\Http\Request;
 	}
 
+	
+	/**
+	 * [connection description]
+	 * @return [type] [description]
+	 */
+	private function __dbconnector () {
+		
+		$databases = $this->Variable::settings("databases");
+		$config	   = (array)$databases;
+		$this->confconnection = $config;
+
+
+		if ( is_null( $config ) ) {
+			return FALSE;
+		}
+
+
+		if ( is_array( $config ) ) {
+
+			foreach ( $databases as $key_db => $val_db ) {
+				// setting connection
+				$conf 	   = $val_db;
+
+				if ( is_object($val_db) ) {
+					$dbhost    = $conf->dbhost;
+					$dbport    = $conf->dbport;
+					$dbuser    = $conf->dbuser;
+					$dbpass    = $conf->dbpass;
+					$dbname    = $conf->dbname;
+					$dbprevix  = $conf->dbprevix;
+					$dbdriver  = $conf->dbdriver; 
+					
+					$connector_pdo = new \PDO(
+						"mysql:host=$dbhost;port=$dbport;dbname=$dbname", 
+						$dbuser , 
+						$dbpass , 
+						array( \PDO::ATTR_PERSISTENT => false)
+					);
+					$connector_pdo->active = $val_db;
+
+					$this->connection[$key_db] = $connector_pdo;
+
+				}
+
+			}	
+
+		}
+		
+
+		
+	}
 	
 
 	/**
