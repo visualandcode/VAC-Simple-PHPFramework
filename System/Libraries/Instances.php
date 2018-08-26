@@ -27,7 +27,7 @@ class Instances {
 		$time_start = microtime(true);
 		$time_end   = microtime(true);
 		$time = $time_end - $time_start;
-		echo 'Execution time : '. round($time+1) .' seconds';
+		echo '<br><pre>Execution time : '. round($time+1) .' seconds</pre>';
 	}
 
 

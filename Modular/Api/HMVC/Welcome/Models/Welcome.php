@@ -5,12 +5,17 @@ namespace Modular\Api\HMVC\Welcome\Models;
 class Welcome extends \Cores\Models {
 
 	public function findById ( $id = null ) {
-		//$selectfrom = $this->select->columns('*')->from('test');
+		
+		$this->db->setdb("mysql");
+		$this->db->closedb();
 
-		$selfdb = self::DB("mysql");
-		self::instances()->Debuger::print($selfdb);
+		$selectfrom = $this->select->columns('*')->from('table_one');
+		self::instances()->Debuger::print($selectfrom->fetchAll());
 
-		self::instances()->Debuger::print($this);
+
+
+		// self::instances()->Debuger::print($this);
+
 
 	}
 

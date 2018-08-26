@@ -3,7 +3,8 @@
 
 return array(
 	"environment" => "DEVELOPMENT" ,
-	"layout"	  => "blue" 
+	"layout"	  => "blue" ,
+	"title"		  => "VAC-Framework"
 );
 
 
