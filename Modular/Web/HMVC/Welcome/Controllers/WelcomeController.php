@@ -9,13 +9,14 @@ class WelcomeController extends \Cores\Controller {
 	 * @return [type] [description]
 	 */
 	public function index () {
-		
-		$this->model( array("Welcome" , "Welcomes")  );
-		$this->welcomes->findById();
+		$data = array( "messages" => "Welcome Pages!" , "allow" => array(
+			
+				"nama" => 'Ahmad Wahyudin' , 
+				"lahir" => 'Jakarta'
 
-		$request = $this->request->query();
-		
-
+		) );
+		$this->view("welcome" , $data , true );
+		$this->view("welcomes" , $data );
 	}
 
 
@@ -23,10 +24,9 @@ class WelcomeController extends \Cores\Controller {
 	 * [anu description]
 	 * @return [type] [description]
 	 */
-	public function anu () {
-		
-
-
+	public function json () {
+		$data = array( "messages" => "Welcome Pages!" );
+		return $data;
 	}
 
 

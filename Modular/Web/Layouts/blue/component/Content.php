@@ -1,3 +1,5 @@
-<div class="content-wrapper">
-	{{ content }}
-</div>
+<div class="content-wrapper" id="content"></div>
+
+
+
+

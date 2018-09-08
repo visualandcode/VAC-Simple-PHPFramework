@@ -18,10 +18,6 @@ class HomeController extends \Cores\Controller {
 	 */
 	public function index () {
 		$this->welcome->findById();
-
-
-		echo "This is home";
-
 		echo $this->timeexec();
 	}
 

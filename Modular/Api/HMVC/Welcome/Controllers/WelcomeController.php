@@ -17,7 +17,8 @@ class WelcomeController extends \Cores\Controller {
 	 * @return [type] [description]
 	 */
 	public function index () {
-		echo 1;
+		$data = array( "messages" => "Welcome Pages!" );
+		$this->view("welcome" , $data , true);
 	}
 
 

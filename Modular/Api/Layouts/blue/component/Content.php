@@ -1,3 +1,1 @@
-<div class="content-wrapper" id="vue-content">
-	{{ message }}
-</div>
+<div class="content-wrapper" id="vue-content"></div>

@@ -98,7 +98,6 @@ if ( is_readable( "../.htaccess" ) )
 						}
 
 						return false;
-
 					}
 
 
@@ -108,7 +107,8 @@ if ( is_readable( "../.htaccess" ) )
 						$CtrlMethod     = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule.'\\Controllers\\'.$CtrlSubModule."Controller";
 						$DirCtrlModular = 'Modular\\'.$Modular.'\\HMVC\\'.$CtrlModule;
 						$DirModular     = 'Modular\\'.$Modular.'\\';
-						
+
+
 						if ( class_exists( $CtrlMethod ) ) 
 						{
 

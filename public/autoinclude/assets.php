@@ -7,16 +7,6 @@
 (function () {
 
 
-new Vue({
-  el: '#vue-content',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
-
-
-
-
 
 })();
 

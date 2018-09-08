@@ -8,7 +8,10 @@ return array(
 
 	"autoload" 	  => array(
 		"request" => "\Libs\Http\Request"
-	) 
+	) ,
+
+	"content"	  => "#content"
+
 );
 
 

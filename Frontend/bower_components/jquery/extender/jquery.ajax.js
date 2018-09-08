@@ -1,21 +1,25 @@
 (function () {
 
-
 jQuery.fn.extend({
-
 	ajaxhtml : function ( ajaxurl , returncontent ) {
 		ajaxurl = $.baseurl + "/" + ajaxurl;
+		var thiselm = this;
 		var param = {
 			url : ajaxurl , 
 			type : "POST" , 
 			headers: {
 				'X-Requested-With': 'XMLHttpRequest'
 			} ,
-			contentType : "html" 
+			contentType : "html" , 
+			success : function (datas) {
+				$(thiselm).append(datas);
+			}
 		};
 
 		if ( typeof(returncontent) == 'function' ) {
-			return returncontent($.ajax( param ));
+			var returnajaxcontent = $.ajax( param );
+			returncontent(returnajaxcontent);
+			return returnajaxcontent;
 		} else {
 			return $.ajax( param );
 		}
@@ -34,19 +38,15 @@ jQuery.fn.extend({
 		};
 
 		if ( typeof(returncontent) == 'function' ) {
-			return returncontent($.ajax( param ));
+			var returnajaxcontent = $.ajax( param );
+			returncontent(returnajaxcontent);
+			return returnajaxcontent;
 		} else {
 			return $.ajax( param );
 		}
 	}
 
 });
-
-var getdata = $("#vue-content").ajaxjson( "api/" , function (e) {
-	console.log("from ajax return callback => " , e);
-});
-
-
 
 
 })();

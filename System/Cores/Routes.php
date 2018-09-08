@@ -17,10 +17,8 @@ class Routes extends Instances {
 	 * [__construct description]
 	 */
 	public function __construct () {
-
 		// set autoloader
 		$this->request = new \Libs\Http\Request;
-
 	}
 
 	/**
@@ -28,12 +26,12 @@ class Routes extends Instances {
 	 * @param  [type] $filename [description]
 	 * @return [type]           [description]
 	 */
-	public function view ( $filename = null , $data = array() ) {
+	public function view ( $filename = null , $data = array() , $type = false ) {
 
 		$counterror = 0;
 
 		if ( !is_null($filename) ) {
-			$this->_controller_name[] = $filename;
+			$this->_controller_name[] 		   = $filename;
 			$this->_data_views[$filename]      = $data;  // set information
 			
 			$dir_filename = "../" . $this->_controllermodular . "/Views/"; //set directory view by modular
@@ -41,8 +39,27 @@ class Routes extends Instances {
 
 			if ( is_dir( $dir_filename ) ) {  // check if dir filename is exists
 				if ( file_exists($filename) ) {
-					extract($data);
-					require_once( $filename );
+
+					$object = '';
+					if ( is_array( $data ) ) {
+						foreach ( $data as $key => $value  ) {
+							if ( !is_array($value) ) {
+								$object .= $key . " : '" . $value . "' ,";
+							} else {
+								$value = json_encode($value);
+								$object .= $key . " : " . $value . " ,";
+							}
+						}
+					}
+
+					if ( $type ) {
+						$data = json_encode($data);
+						require_once( $filename );
+					} else {
+						extract($data);	
+						require_once( $filename );
+					}
+
 				} else {
 					$counterror += 1;
 				}
@@ -50,6 +67,7 @@ class Routes extends Instances {
 				$counterror += 1;
 			}
 		}
+
 
 
 		if ( $counterror > 0 ) {
